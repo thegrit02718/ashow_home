@@ -1,30 +1,18 @@
 import './AshowMain.css';
-import Question from './Question';
-import LocationMap from './LocationMap';
-import Footer from './Footer';
+import Question from './Ashow/Question';
+import LocationMap from './Ashow/LocationMap';
+import Footer from './Ashow/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import Header from './Ashow/Header';
 
 function AshowMain() {
   
   return (
     <div className="AshowMain">
-      {/* menu */}
-      <header className="header">
-        <div className="menu" id="menu">
-          <div className="menu_1">
-            <div className="maintitle" onClick={()=>{
-              window.scroll({top:0, left:0, behavior:'smooth'})
-              }}>Ashow</div>
-          </div>
-          <div className="menu_2"></div>
-          <div className="menu_3">
-            <div className="menulist" onClick={()=>{}}>What is Ashow</div>
-            <div className="menulist" onClick={()=>{}}>문의</div>
-            <div className="menulist" onClick={()=>{}}>오시는길</div>
-          </div>
-        </div>
-      </header>
+      
+      <Header></Header>
+     
       
       {/* 메인화면 */}
       <section className="mainNotice">
@@ -36,6 +24,7 @@ function AshowMain() {
           <div className='noticeImageBox'>
             <img src='img/sample(1).png'></img>
           </div>
+
           <div className="sub_notice2">
           어플리케이션 ‘아쇼’는, 부동산 거래에 필요한 정보를 수집하고, 
           <br></br>이를 사용자에게 제공하여 부동산의 거래 비용을 절감하여, 
