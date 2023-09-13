@@ -19,12 +19,12 @@ export default function Header() {
           <div className="menulist" onClick={()=>{}}>What is Ashow</div>
           <div className="menulist" onClick={()=>{}}>문의</div>
           <div className="menulist" onClick={()=>{}}>위치</div>
-          <div className="menulist" onClick={()=>{
+          {/* <div className="menulist" onClick={()=>{
               navigate(`/login`)
-          }}>회원가입</div>
+          }}>로그인</div>
           <div className="menulist" onClick={()=>{
               navigate(`/admin`)
-          }}>관리자</div>
+          }}>관리자</div> */}
 
           </div>
       </div>

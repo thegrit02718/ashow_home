@@ -1,35 +1,64 @@
-import React from 'react';
+
 import './Admin.css'; 
+import React, { useState } from 'react';
 import Header from '../Ashow/Header';
 import Footer from '../Ashow/Footer';
 import { useNavigate } from 'react-router-dom';
 import MainURL from '../MainURL';
 import axios from 'axios';
-
-const test = () => {
-  axios
-  .post(`${MainURL}/notification/allsend`, {
-    iosToken : 'fjdBESQ28U5sofP0i3l-EF:APA91bGjyzufFVfkUoXkToxizVadB1sAo1G9nC8ttf5nnbpmxDGcb6W780ZOWikK8qLShIwQB8shhRr9N3Hfvkhl1fM2L_T6Txp0VHZEilWiW1y1rDJGgBHWrXMveDwPEBAgEWy4eOS5',
-    androidToken : 'fKP53BLKQSatC1-xQ00S_f:APA91bE9OhNph68EYnWZlKaS-lNoEFgGJnJz-7M6m24jd4B7xbd_Xg3naMT5GPIPVPwU4q0HWbmkRIrE4W2ONtMcLW3qDrIjRCVJnfyM0sEdUPICUCl26alZikufa0fK4xrGPNvlD2ps'
-  })
-  .then((res) => { 
-   console.log(res.data);
-  })
-  .catch((err) => {
-    console.log('Notification_err', err);
-  });
-}
+import { useCookies } from 'react-cookie';
 
 export default function Admin( props: any) {
-  
+
+  const [cookies, setCookie, removeCookie] = useCookies(['login']);
+
+  let navigate = useNavigate();
+
+  let [이름, set이름] = useState('');
+  let [비번, set비번] = useState('');
+
+  const login = () => {
+    axios.post(`${MainURL}/login/loginadmin`, {
+      username : 이름, password : 비번
+    }).then((res)=>{
+      if (res.data) {
+        alert('관리자 로그인 되었습니다.')
+        navigate('/adminmain');
+      } else {
+        alert('아이디,비번이 잘못되었습니다. 다시 시도하세요.')
+      } 
+    })
+    .catch((error)=>{console.log(error)})
+  }
+
   return (
     <div className="AdminContainer">
       <Header/>
       <div  className="AdminContent">
-        
-      <button
-          onClick={test}
-        >사용자 전체 알림 발송</button>
+
+        <div className='admin_input_wrapper'>
+          <div className='admin_box1'>
+            <div className='admin_content'>아이디</div>
+            <div className='admin_content'>
+              <input className='admin_content_input' type='text' onChange={(e)=>{set이름(e.target.value)}}></input>
+            </div>
+          </div>
+
+          <div className='admin_box2'>
+            <div className='admin_content'>비밀번호</div>
+            <div className='admin_content'>
+              <input className='admin_content_input' type='password' onChange={(e)=>{set비번(e.target.value)}}></input>
+            </div>
+          </div>
+
+        </div>
+
+        <button className='login_button' 
+            onClick={login}>로그인</button>
+
+        <button className='home_button' 
+            onClick={()=>{navigate('/')}}>뒤로가기</button>
+      
       </div>
      
       {/* footer */}

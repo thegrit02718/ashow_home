@@ -10,11 +10,11 @@ export default function Login( props: any) {
   const navigate = useNavigate();
   
   const NAVER_CLIENT_ID = 'cIPtzvvlX1yC_UcFjo3L';
-  const NAVER_CALLBACK_URL = `${MainURL}/loginnaver`;
+  const NAVER_CALLBACK_URL = `${MainURL}:3000/loginnaver`;
   const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${NAVER_CLIENT_ID}&redirect_uri=${NAVER_CALLBACK_URL}&state=YOUR_UNIQUE_STATE`;
 
   const KAKAO_REST_API_KEY = '9144dd102afc1c92b050b2b691bf028e';
-  const KAKAO_REDIRECT_URI = `${MainURL}/loginkakao`;
+  const KAKAO_REDIRECT_URI = `${MainURL}:3000/loginkakao`;
   const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`
   
   return (

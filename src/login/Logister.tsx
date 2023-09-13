@@ -15,12 +15,15 @@ function Logister(props: any) {
   const [userAccount, setUserAccount] = useState('');
   const [userName, setUserName] = useState('');
   const [userNickName, setUserNickName] = useState('');
+  const [userURL, setUserURL] = useState('');
   
   const [userAccountMessage, setUserAccountMessage] = useState('');
   const [isUserAccount, setIsUserAccount] = useState(false);
   const [userNameMessage, setUserNameMessage] = useState('');
   const [isUserName, setIsUserName] = useState(false);
-
+  const [userNickNameMessage, setUserNickNameMessage] = useState('');
+  const [isUserNickName, setIsUserNickName] = useState(false);
+  const [countText, setCountText] = useState<number>(0);
   
   useEffect(() => {
     navi_dataSet();
@@ -33,6 +36,7 @@ function Logister(props: any) {
       setRefreshToken(location.state.refreshToken);
       setUserAccount(location.state.userAccount);
       setUserName(location.state.userName);
+      setUserURL(location.state.userURL);
     }
   };
 
@@ -68,6 +72,18 @@ function Logister(props: any) {
   const onChangeUserNickName = (e : any) => {
     const text = e.target.value;
     setUserNickName(text);
+
+    const copy = text.length;
+    setCountText(copy);
+
+    if (text.length >= 2 && text.length <= 10 && text !== '') {
+      setIsUserNickName(true)
+      setUserNickNameMessage('사용 가능한 닉네임입니다');
+    } else {
+      setIsUserNickName(false)
+      setUserNickNameMessage('닉네임은 최소 2자 이상 10자 이하로 사용 가능합니다');
+    }
+
   };
 
   const handleSignup = () => {
@@ -77,6 +93,7 @@ function Logister(props: any) {
           userAccount: userAccount,
           userName: userName,
           userNickName: userNickName,
+          userURL: userURL
         })
         .then((res) => {
           if (res.data === userName) {
@@ -137,7 +154,7 @@ function Logister(props: any) {
             value={userNickName}
             onChange={onChangeUserNickName}
           />
-          {/* <div className={`message ${isUserName ? 'success' : 'error'}`}>{userNameMessage}</div> */}
+          <div className={`message ${isUserNickName ? 'success' : 'error'}`}>{userNickNameMessage}</div>
         </div>
 
         <button className="submitButton" onClick={handleSignup}>가입하기</button>

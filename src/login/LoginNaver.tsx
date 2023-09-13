@@ -14,15 +14,14 @@ export default function LoginNaver(props : any) {
     const access_token = getParamFromUrl(callbackURL, 'access_token');
     console.log(access_token);
     axios
-      .post(`${MainURL}/login/loginnaver`, {
+      .post(`${MainURL}/login/login/naver`, {
         AccessToken: access_token
       })
       .then((res: any)=>{
         if (res.data.isUser === true) {
-          console.log('res.data', res.data)  
-          navigate(`/logister`, { state : res.data })
+          navigate(`/`);
         } else if (res.data.isUser === false) {
-          console.log('false')
+          navigate(`/logister`, { state : res.data })
         }
       }).catch((err : string)=>{
         console.log('토큰요청_err :', err)
@@ -45,6 +44,10 @@ export default function LoginNaver(props : any) {
   }, [])
 
   return (
-    <div></div>
+    <div style={{display : 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <div>
+        네이버
+      </div>
+    </div>
   )
 }
