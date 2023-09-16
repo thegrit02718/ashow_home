@@ -11,16 +11,16 @@ export default function AdminMain( props: any) {
   const navigate = useNavigate();
 
   let [notifiTitle, setNotifiTitle] = useState('');
-  let [notifiBody, setNotifiBody] = useState('');
+  let [notifiMessage, setNotifiMessage] = useState('');
   
   const handleNotification = () => {
     axios
     .post(`${MainURL}/notification/allsend`, {
       notifiTitle : notifiTitle,
-      notifiBody : notifiBody
+      notifiMessage : notifiMessage
     })
     .then((res) => { 
-    console.log(res.data);
+      alert(`Title: ${res.data.notifiTitle}, Body: ${res.data.notifiMessage}`);
     })
     .catch((err) => {
       console.log('Notification_err', err);
@@ -47,7 +47,7 @@ export default function AdminMain( props: any) {
               <div className='admin_content'>Body</div>
               <div className='admin_content' style={{height: 200}}>
                 <input className='admin_content_input' style={{height: 180}}
-                  type='text' onChange={(e)=>{setNotifiBody(e.target.value)}}></input>
+                  type='text' onChange={(e)=>{setNotifiMessage(e.target.value)}}></input>
               </div>
             </div>
 
