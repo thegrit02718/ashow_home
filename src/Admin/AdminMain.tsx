@@ -22,7 +22,9 @@ export default function AdminMain( props: any) {
   let [notifiList, setNotifiList] = useState<notifiList[]>([]);
   const fetchDatas = () => {
     axios.get(`${MainURL}/notification/notifigetlist`).then((res) => {
-      setNotifiList(res.data);
+      const copy = res.data;
+      copy.reverse();
+      setNotifiList(copy);
     })
   }
 
@@ -50,6 +52,23 @@ export default function AdminMain( props: any) {
     });
   }
 
+  // State 변수 추가
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5; // 한 페이지당 표시될 알림 수
+  const totalPages = Math.ceil(notifiList.length / itemsPerPage);
+
+  // 알림 리스트를 현재 페이지에 해당하는 부분만 필터링
+  const displayedNotifiList = notifiList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // 페이지 변경 함수
+  const changePage = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
+  
   
   return (
     <div className="AdminContainer">
@@ -68,7 +87,7 @@ export default function AdminMain( props: any) {
             </div>
 
             {
-              notifiList.map((item:any, index:any)=>{
+               displayedNotifiList.map((item:any, index:any)=>{
                 return(
                   <div>
                     <div style={{width: '100%', height: '1px', backgroundColor: '#BDBDBD'}}></div>
@@ -82,8 +101,18 @@ export default function AdminMain( props: any) {
                 )
               })
             }
-            
-            
+          </div>
+
+          <div>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => changePage(page)}
+                style={{ margin: '5px', padding: '5px', cursor: 'pointer', borderRadius: '5px', }}
+              >
+                {page}
+              </button>
+            ))}
           </div>
 
           <div className='admin_input_wrapper'>

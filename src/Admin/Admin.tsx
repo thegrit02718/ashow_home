@@ -38,7 +38,7 @@ export default function Admin( props: any) {
 
         <div className='admin_input_wrapper'>
           <div className='admin_box1'>
-            <div className='admin_content'>아이디</div>
+            <div className='admin_content'>아이디</div>|
             <div className='admin_content'>
               <input className='admin_content_input' type='text' onChange={(e)=>{set이름(e.target.value)}}></input>
             </div>
