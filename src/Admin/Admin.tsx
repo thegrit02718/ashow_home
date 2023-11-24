@@ -58,7 +58,7 @@ export default function Admin( props: any) {
 
         <button className='home_button' 
             onClick={()=>{navigate('/')}}>뒤로가기</button>
-      
+
       </div>
      
       {/* footer */}
